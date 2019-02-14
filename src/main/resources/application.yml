@@ -1,0 +1,38 @@
+
+server:
+  port: 9090
+
+
+spring:
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+  profile:
+    active: dev
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/CS_SOON?autoReconnect=true&useSSL=false&useUnicode=true&serverTimezone=UTC
+    username: root
+    password: 5717
+
+
+property:
+  test:
+    name: property depth test
+
+propertyTest: test
+
+propertyTestList: a,b,c
+
+fruit:
+  list:
+    - name: banana
+      color: yellow
+    - name: apple
+      color: red
+    - name: water melon
+      color: green
+
+
