@@ -11,7 +11,7 @@ import java.time.ZoneId;
 
 
 @Entity
-@Table(name="CS_API_TARGET_INFO")
+@Table(name="ESC_API_TARGET_INFO")
 @Getter
 @NoArgsConstructor
 public class ApiTargetInfo implements Serializable {
