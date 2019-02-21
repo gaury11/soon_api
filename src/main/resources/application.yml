@@ -2,20 +2,40 @@
 server:
   port: 9090
 
-
+# 환경 선택 --- 으로 구분
 spring:
+  profiles:
+    active: dev
+
+# 로컬 개발 환경
+---
+spring:
+  profiles: local
   jpa:
     properties:
       hibernate:
         show_sql: true
         format_sql: true
-  profile:
-    active: dev
   datasource:
     driverClassName: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/CS_SOON?autoReconnect=true&useSSL=false&useUnicode=true&serverTimezone=UTC
     username: root
     password: 5717
+
+# 사내 개발 환경
+---
+spring:
+  profiles: dev
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://211.48.18.233:3306/ESC?autoReconnect=true&useSSL=false&useUnicode=true&serverTimezone=UTC
+    username: root
+    password: humuson0722
 
 
 property:
