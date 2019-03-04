@@ -12,13 +12,16 @@ spring:
 spring:
   profiles: local
   jpa:
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     properties:
       hibernate:
         show_sql: true
         format_sql: true
   datasource:
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/CS_SOON?autoReconnect=true&useSSL=false&useUnicode=true&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/ESC?autoReconnect=true&useSSL=false&useUnicode=true&serverTimezone=UTC
     username: root
     password: 5717
 
@@ -27,6 +30,9 @@ spring:
 spring:
   profiles: dev
   jpa:
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     properties:
       hibernate:
         show_sql: true
