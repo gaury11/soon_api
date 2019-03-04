@@ -34,8 +34,8 @@ public class ApiTargetInfoService {
     }
 
     @Transactional
-    public void saveApiTargetInfo(ApiTargetInfo apiTargetInfo){
-        apiTargetInfoRepository.save(apiTargetInfo);
+    public ApiTargetInfo saveApiTargetInfo(ApiTargetInfo apiTargetInfo){
+        return apiTargetInfoRepository.save(apiTargetInfo);
     }
 
     @Transactional

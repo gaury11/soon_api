@@ -1,13 +1,14 @@
-package com.soon.controllerTests;
+package com.soon.controller;
 
-import com.soon.service.ApiTargetInfoService;
 import com.soon.domain.ApiTargetInfo;
+import com.soon.service.ApiTargetInfoService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -30,35 +31,38 @@ public class ApiTargetInfoController {
     @GetMapping("")
     public ResponseEntity<List<ApiTargetInfo>> getApiTargetInfoList(){
 
-        ResponseEntity<List<ApiTargetInfo>> entity = null;
+        ResponseEntity<List<ApiTargetInfo>> response = null;
 
         try{
-            entity = new ResponseEntity<>(apiTargetInfoService.findApiTargetInfoList(), HttpStatus.OK);
+            response = new ResponseEntity<>(apiTargetInfoService.findApiTargetInfoList(), HttpStatus.OK);
         }catch(Exception e){
             e.printStackTrace();
-            entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            response = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        return entity;
+        return response;
     }
 
     @PostMapping("/save")
-    public String postApiTargetInfo(@RequestBody Map<String, Object> params){
+    public ResponseEntity<ApiTargetInfo> postApiTargetInfo(@RequestBody Map<String, Object> params){
 
         log.info("params : {}", params.toString());
+
+        ResponseEntity<ApiTargetInfo> response = null;
 
         ApiTargetInfo apiTargetInfo = ApiTargetInfo.builder()
                 .targetName(params.get("targetName").toString())
                 .targetUrl(params.get("targetUrl").toString())
+                .regDate(LocalDateTime.now())
                 .build();
 
-        apiTargetInfo.setRegDateNow();
+        log.info("apiTargetInfo - name : {} / url : {} / regDate : {}", apiTargetInfo.getTargetName(), apiTargetInfo.getTargetUrl(), apiTargetInfo.getRegDate());
 
-        log.info("apiTargetInfo - name : {} / url :{}", apiTargetInfo.getTargetName(), apiTargetInfo.getTargetUrl());
+        response = new ResponseEntity<>(apiTargetInfoService.saveApiTargetInfo(apiTargetInfo), HttpStatus.OK);
 
-        apiTargetInfoService.saveApiTargetInfo(apiTargetInfo);
+        log.info("result : {}", response.toString());
 
-        return "";
+        return response;
     }
 
     @PutMapping("/{id}")

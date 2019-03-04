@@ -39,13 +39,13 @@ public class ApiTargetInfo implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(name = "target_name")
     private String targetName;
 
-    @Column
+    @Column(name = "target_url")
     private String targetUrl;
 
-    @Column
+    @Column(name = "reg_date")
     private LocalDateTime regDate;
 
     @Builder
@@ -55,8 +55,9 @@ public class ApiTargetInfo implements Serializable {
         this.regDate = regDate;
     }
 
-    public void setRegDateNow(){
-        this.regDate = LocalDateTime.now();
+    @Override
+    public String toString() {
+        return "targetName : " + targetName + " / targetUrl : " + targetUrl + " / regDate : " + regDate;
     }
 
     public void update(ApiTargetInfo apiTargetInfo){
